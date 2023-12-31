@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  plex:
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    container_name: plexms
+    environment:
+      - PUID=998 # Replace with smbuser's UserID
+      - PGID=999 # Replace with smbuser's GroupID
+      - TZ=Europe/London
+      - PLEX_CLAIM=claim-<your-string>
+      - HOSTNAME="PlexServer"
+    volumes:
+      - /hdrive/containers/plex/config:/config
+      - /hdrive/nextcloud_data/zack/files/plex/:/tv
+      - /hdrive/nextcloud_data/zack/files/plex/movie:/movies

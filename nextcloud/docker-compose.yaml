@@ -1,0 +1,35 @@
+version: "3"
+services:
+  app:
+    depends_on:
+      - db
+    environment:
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_NAME=${SMTP_NAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+    image: nextcloud
+    user: '998:999'
+    links:
+      - db
+    ports:
+      - "8088:80"
+    restart: always
+    volumes:
+      - "/hdrive/containers/nextcloud/nextcloudapp:/var/www/html"
+      - "/hdrive/nextcloud_data:/var/www/html/data"
+  db:
+    command: "--transaction-isolation=READ-COMMITTED --binlog-format=ROW"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    image: "mariadb:10.5"
+    restart: always
+    volumes:
+      - "/hdrive/containers/nextcloud/nextclouddb:/var/lib/mysql"
