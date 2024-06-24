@@ -1577,11 +1577,11 @@
           "container": "/config"
         },
         {
-          "bind": "/mnt/smb_share/portainer/TV",
+          "bind": "/mnt/smb_share/portainer/media",
           "container": "/media"
         },
         {
-          "bind": "/mnt/smb_share/portainer/Movies",
+          "bind": "/mnt/smb_share/portainer/media2",
           "container": "/media2"
         }
       ]
@@ -3815,7 +3815,7 @@
           "container": "/config"
         },
         {
-          "bind": "/mnt/smb_share/portainer/Files/Downloads",
+          "bind": "/mnt/smb_share/portainer/media",
           "container": "/downloads"
         },
         {
