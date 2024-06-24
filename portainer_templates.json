@@ -1544,17 +1544,27 @@
         },
         {
           "label": "TZ",
-          "name": "TZ"
+          "name": "TZ",
+          "default": "America/Toronto"
+        },
+        {
+          "label": "Published Server URL",
+          "name": "JELLYFIN_PublishedServerUrl",
+          "default": "http://example.com"
         }
       ],
-      "image": "linuxserver/jellyfin:latest",
+      "network": "host",
+      "privileged": false,
+      "extra_hosts": [
+        {
+          "host": "host.docker.internal",
+          "ip": "host-gateway"
+        }
+      ],
+      "image": "jellyfin/jellyfin:latest",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/jellyfin.png",
       "name": "jellyfin",
       "platform": "linux",
-      "ports": [
-        "8096:8096/tcp",
-        "8920:8920/tcp"
-      ],
       "restart_policy": "unless-stopped",
       "title": "Jellyfin",
       "type": 1,
@@ -1565,11 +1575,11 @@
         },
         {
           "bind": "/mnt/smb_share/portainer/TV",
-          "container": "/data/tvshows"
+          "container": "/media"
         },
         {
           "bind": "/mnt/smb_share/portainer/Movies",
-          "container": "/data/movies"
+          "container": "/media2"
         }
       ]
     },
